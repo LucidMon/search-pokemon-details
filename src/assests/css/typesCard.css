@@ -1,0 +1,99 @@
+:root {
+    --color-normal: #A4ACAF;
+    --color-fighting: #D56723; 
+    --color-flying: linear-gradient(180deg, #3DC7EF, #BDB9B8);
+    --color-poison: #B97FC9; 
+    --color-ground: linear-gradient(180deg, #F7DE3F, #AB9842); 
+    --color-rock: #A38C21; 
+    --color-bug: #729F3F; 
+    --color-ghost: #7B62A3; 
+    --color-steel: #9EB7B8;  
+    --color-fire: #FD7D24; 
+    --color-water: #4592C4; 
+    --color-grass: #9BCC50; 
+    --color-electric: #EED535; 
+    --color-psychic: #F366B9; 
+    --color-ice: #51C4E7; 
+    --color-dragon: linear-gradient(180deg, #53A4CF, #F16E57); 
+    --color-dark: #707070; 
+    --color-fairy: #FDB9E9;
+}
+
+.card-type {
+    display: flex;
+    gap: 10px;
+    margin-top: 5x;
+    color: #FFFFFF;
+}
+
+.water {
+	background-color: var(--color-water);
+}
+
+.grass {
+	background-color: var(--color-grass);
+}
+
+.poison {
+	background-color: var(--color-poison);
+}
+
+.fire {
+	background-color: var(--color-fire);
+}
+
+.bug {
+	background-color: var(--color-bug);
+}
+
+.dragon {
+	background: var(--color-dragon);
+}
+
+.flying {
+	background: var(--color-flying);
+}
+
+.ground {
+	background: var(--color-ground);
+}
+
+.steel {
+	background-color: var(--color-steel);
+}
+
+.psychic {
+	background-color: var(--color-psychic);
+}
+
+.ice {
+	background-color: var(--color-ice);
+}
+
+.ghost {
+	background-color: var(--color-ghost);
+}
+
+.normal {
+	background-color: var(--color-normal);
+}
+
+.rock {
+	background-color: var(--color-rock);
+}
+
+.electric {
+	background-color: var(--color-electric);
+}
+
+.fighting {
+	background-color: var(--color-fighting);
+}
+
+.fairy {
+	background-color: var(--color-fairy);
+}
+
+.dark {
+	background-color: var(--color-dark);
+}
