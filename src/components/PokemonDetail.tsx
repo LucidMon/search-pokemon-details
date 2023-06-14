@@ -15,13 +15,19 @@ export const PokemonDetail = (props: {name: string, id: number, sprites: ISprite
                 <div className="col-6">
                     <div className="pokemon profile">
                         <div className="card border-1 bg-light mx-auto"
-                        style={{width: '80%', height: '80%'}}>
+                        style={{width: '50%', height: '50%'}}>
                             <img className="card-img-top" alt='Pokemon Img Profile' src={sprites.other?.["official-artwork"].front_default}></img>
                         </div>
                     </div>
                 </div>
 
                 <div className="col-6">
+                    <div className="pokemon-description">
+                        <div className="title-description fs-2">
+                            <span>Descripcion</span>
+                        </div>
+                    </div>
+
                     <div className="pokemon-type">
                         <div className="title-type fs-2">
                             <span>Tipos</span>
