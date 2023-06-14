@@ -20,7 +20,7 @@ export const SearchPokemon: React.FC<SearchPokemonProps> = ({onSearch}) =>{
         <div className="container" style={{ width: "50%" }}>
             <form onSubmit={handleSubmit}>
                 <div className="input-group mt-3 mb-3 mx-auto">
-                    <input type="text" className="form-control" placeholder="pokemon" value={valueInput} onChange={(e) => handleChange(e.target.value)}></input>
+                    <input type="text" className="form-control" placeholder="pokemon or id" value={valueInput} onChange={(e) => handleChange(e.target.value)}></input>
                     <button type="submit" className="btn btn-danger">Buscar</button>
                 </div>
             </form>

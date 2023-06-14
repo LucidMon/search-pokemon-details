@@ -2,8 +2,8 @@ import React from "react";
 import { ISprites, IType } from "../interfaces/pokemon.interface";
 import { IRatioDamage } from "../interfaces/ratioDamage.interface";
 
-export const PokemonDetail = (props: {name: string, id: number, sprites: ISprites, types: IType[], damage: IRatioDamage[]}) => {
-    const { name, id, sprites, types, damage } = props;
+export const PokemonDetail = (props: {name: string, id: number, sprites: ISprites, types: IType[], damage: IRatioDamage[], flavor_text_entry: string}) => {
+    const { name, id, sprites, types, damage, flavor_text_entry } = props;
     return (
         <div className="container">
             <section className="title-pokemon mx-auto fs-2" style={{marginBottom: '10px'}}>
@@ -25,6 +25,9 @@ export const PokemonDetail = (props: {name: string, id: number, sprites: ISprite
                     <div className="pokemon-description">
                         <div className="title-description fs-2">
                             <span>Descripcion</span>
+                        </div>
+                        <div className="flavor_text_entry">
+                            <span>{flavor_text_entry}</span>
                         </div>
                     </div>
 
