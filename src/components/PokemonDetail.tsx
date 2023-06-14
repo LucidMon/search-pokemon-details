@@ -1,51 +1,83 @@
-import React, { useEffect } from "react";
-import { SpritesPokemon } from "./SpritesPokemon";
+import React from "react";
 import { ISprites, IType } from "../interfaces/pokemon.interface";
-import { ElementNamePokemon } from "./ElementNamePokemon";
-import { ListTypes } from "./ListTypes";
+import { IRatioDamage } from "../interfaces/ratioDamage.interface";
 
-export const PokemonDetail = (name: string, id: number,sprite: ISprites, type: IType[]) => {
-
-    useEffect(() => {
-
-    }, [])
-
-    return(
+export const PokemonDetail = (props: {name: string, id: number, sprites: ISprites, types: IType[], damage: IRatioDamage[]}) => {
+    const { name, id, sprites, types, damage } = props;
+    return (
         <div className="container">
-            <section className="name-id-pokemon">
-                <div className="mx-auto" style={{marginBottom: '10px'}}>
-                    {ElementNamePokemon(name, id)}
-                </div>
+            <section className="title-pokemon mx-auto fs-2" style={{marginBottom: '10px'}}>
+                <span className="name-pokemon">{name}</span>
+                <span className="id-pokemon" style={{color: '#616161', marginLeft: '10px', whiteSpace: 'nowrap'}}> N°{id}</span>
             </section>
 
             <section className="pokemon-details row">
                 <div className="col-6">
-                    <div className="pokemon-profile">
-                         <div className="card border-1 bg-light mx-auto" 
-                            style={{width:'80%', height: '80%'}}>
-                            {SpritesPokemon(sprite)}
-                         </div>
+                    <div className="pokemon profile">
+                        <div className="card border-1 bg-light mx-auto"
+                        style={{width: '80%', height: '80%'}}>
+                            <img className="card-img-top" alt='Pokemon Img Profile' src={sprites.other?.["official-artwork"].front_default}></img>
+                        </div>
                     </div>
                 </div>
+
                 <div className="col-6">
                     <div className="pokemon-type">
-                        <div className="title-type fs-3">
+                        <div className="title-type fs-2">
                             <span>Tipos</span>
                         </div>
-                        <div className="element-type" style={{marginLeft: '5px'}}>
-                            <ul className="list-inline" style={{marginTop: '5px'}}>
-                                {ListTypes(type)}
+                        <div className="elemnt-type">
+                            <ul className="list-inline" style={{marginLeft: '5px'}}>
+                                {
+                                    types.map((element) => {
+                                        return(
+                                            <li className="list-inline-item" key={element.type.name}>
+                                                <div className="card-type">
+                                                    <span className={element.type.name}>
+                                                        {element.type.name}
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        )
+                                    })
+                                }
                             </ul>
                         </div>
                     </div>
+
                     <div className="pokemon-weak-type">
-                        <div className="title-weak-type fs-3">
+                        <div className="title-weak-type fs-2">
                             <span>Debilidades</span>
-                            <ul className="list-inline" style={{marginTop: '5px'}}>
-                                {}
+                        </div>
+                        <div className="weak-element-type">
+                            <ul className="list-inline" style={{marginLeft: '5px'}}>
+                                {
+                                    damage.map((element) => {
+                                        return(
+                                            <>
+                                                {
+                                                    (element.ratio === 2) ? 
+                                                    <li className="list-inline-item" key={element.type}>
+                                                        <div className="card-type">
+                                                            <span className={element.type}>{element.type}</span>
+                                                        </div>
+                                                    </li>
+                        
+                                                    : (element.ratio === 4) ? 
+                                                    <li className="list-inline-item" key={element.type}>
+                                                        <div className="card-type">
+                                                            <span className={element.type}>{element.type} x4</span>
+                                                        </div>
+                                                    </li> 
+                        
+                                                    : null
+                                                }
+                                            </>
+                                        )
+                                    })
+                                }
                             </ul>
                         </div>
-                        <div className="element-weak-type" style={{marginLeft: '5px'}}></div>
                     </div>
                 </div>
             </section>
