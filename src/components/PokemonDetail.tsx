@@ -2,10 +2,11 @@ import React from "react";
 import { ISprites, IType } from "../interfaces/pokemon.interface";
 import { IRatioDamage } from "../interfaces/ratioDamage.interface";
 
-export const PokemonDetail = (props: {name: string, id: number, sprites: ISprites, types: IType[], damage: IRatioDamage[], flavor_text_entry: string}) => {
-    const { name, id, sprites, types, damage, flavor_text_entry } = props;
+export const PokemonDetail = (props: {name: string, id: number, sprites: ISprites, types: IType[], damage: IRatioDamage[], flavor_text_entry: string, 
+height: number, weight: number, genera: string, eggGroup: string, habitat: string, color:string, jaName: string}) => {
+    const { name, id, sprites, types, damage, flavor_text_entry, height, weight, genera, eggGroup, habitat, color, jaName } = props;
     return (
-        <div className="container">
+        <div className="container" style={{width: '80%'}}>
             <section className="title-pokemon mx-auto fs-2" style={{marginBottom: '10px'}}>
                 <span className="name-pokemon">{name}</span>
                 <span className="id-pokemon" style={{color: '#616161', marginLeft: '10px', whiteSpace: 'nowrap'}}> N°{id}</span>
@@ -17,6 +18,7 @@ export const PokemonDetail = (props: {name: string, id: number, sprites: ISprite
                         <div className="card border-1 bg-light mx-auto"
                         style={{width: '50%', height: '50%'}}>
                             <img className="card-img-top" alt='Pokemon Img Profile' src={sprites.other?.["official-artwork"].front_default}></img>
+                            <span className="top-right-span">{jaName}</span>
                         </div>
                     </div>
                 </div>
@@ -27,7 +29,7 @@ export const PokemonDetail = (props: {name: string, id: number, sprites: ISprite
                             <span>Descripcion</span>
                         </div>
                         <div className="flavor_text_entry">
-                            <span>{flavor_text_entry}</span>
+                            <p>{flavor_text_entry}</p>
                         </div>
                     </div>
 
@@ -86,6 +88,35 @@ export const PokemonDetail = (props: {name: string, id: number, sprites: ISprite
                                     })
                                 }
                             </ul>
+                        </div>
+                    </div>
+
+                    <div className="container">
+                        <div className="pokemon-info-specie">
+                            <div className="card text-white bg-dark">
+                                <div className="row">
+                                    <div className="col-6">
+                                        <ul className="list-unstyled">
+                                            <li className="heigth">Altura</li>
+                                            <span>{height/10} m</span>
+                                            <li className="weigth">Peso</li>
+                                            <span>{weight/10} Kg</span>
+                                            <li className="genera">Categoria</li>
+                                            <span>{genera}</span>
+                                        </ul>
+                                    </div>
+                                    <div className="col-6">
+                                        <ul className="list-unstyled">
+                                            <li className="egg-group">Grupo Huevo</li>
+                                            <span>{eggGroup}</span>
+                                            <li className="habitat">Habitat</li>
+                                            <span>{habitat}</span>
+                                            <li className="color">Color</li>
+                                            <span>{color}</span>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

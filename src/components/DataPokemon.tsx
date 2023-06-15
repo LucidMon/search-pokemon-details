@@ -4,7 +4,7 @@ import { IGetPokemon, ISprites, IType } from "../interfaces/pokemon.interface";
 import { IDamageRelations } from "../interfaces/typesElement.interface";
 import { IRatioDamage } from "../interfaces/ratioDamage.interface";
 import { PokemonDetail } from "./PokemonDetail";
-import { FlavorTextEntry, IGetSpecies } from "../interfaces/species.interface";
+import { IGetSpecies } from "../interfaces/species.interface";
 
 export const DataPokemon = (props: {searchValue: string}) => {
     const { searchValue } = props;
@@ -13,24 +13,35 @@ export const DataPokemon = (props: {searchValue: string}) => {
 
     const [namePkm, setNamePkm] = useState<string>('');
     const [idPkm, setIdPkm] = useState<number|undefined>();
-    const [spritesPkm, setSpritesPkm] = useState<ISprites|undefined>()
+    const [spritesPkm, setSpritesPkm] = useState<ISprites|undefined>();
     const [typesPkm, setTypesPkm] = useState<IType[]>([]);
     const [weakTypes, setWeakTypes] = useState<IDamageRelations[]>([]);
+    const [heightPkm, setHeightPkm] = useState<number|undefined>();
+    const [weightPkm, setWeigthPkm] = useState<number|undefined>();
+
     const [relationsDamage, setRelationsDamage] = useState<IRatioDamage[]>([]);
-    const [descriptionUrl, setDescriptionUrl] = useState<string>('');
+    const [SpecieUrl, setSpecieUrl] = useState<string>('');
     const [descriptionPkm, setDescriptionPkm] = useState<string>('');
+    const [generaPkm, setGeneraPkm] = useState<string>('');
+    const [eggGroup, setEggGroup] = useState<string>('');
+    const [generationPkm, setGenerationPkm] = useState<string>('');
+    const [colorPkm, setColorPkm] = useState<string>('');
+    const [habitatPkm, setHabitatPkm] = useState<string>('');
+    const [nameJaPkm, setNameJaPkm] = useState<string>('')
 
     const getPokemon = async () => {
         await axios.get(urlPokemonApi+searchValue)
             .then(({data}) => {
-                const {name, id, sprites, types, species} = data as IGetPokemon;
+                const {name, id, sprites, types, species, height, weight} = data as IGetPokemon;
+                console.log('getPokemon', data);
                 const namePkm = name.charAt(0).toUpperCase() + name.slice(1);
                 setNamePkm(namePkm);
                 setIdPkm(id);
                 setSpritesPkm(sprites);
                 setTypesPkm(types);
-                setDescriptionUrl(species.url);
-                console.log('getPokemon', data);
+                setSpecieUrl(species.url);
+                setHeightPkm(height);
+                setWeigthPkm(weight);
             })
             .catch((error) => {
                 console.log("getPokemon error", error);
@@ -57,9 +68,9 @@ export const DataPokemon = (props: {searchValue: string}) => {
                 });
         }
 
-        axios.get(descriptionUrl)
+        axios.get(SpecieUrl)
             .then(({data}) => {
-                const { flavor_text_entries } = data as IGetSpecies;
+                const { flavor_text_entries, genera, egg_groups, generation, color, habitat, names } = data as IGetSpecies;
                 console.log("getSpecie",data);
 
                 if(flavor_text_entries && flavor_text_entries.length > 0){
@@ -75,9 +86,32 @@ export const DataPokemon = (props: {searchValue: string}) => {
                         }
                 }
 
+                if(genera && genera.length >0){
+                    const esGenera = genera.find(entry => entry.language.name === "es");
+                    const enGenera = genera.find(entry => entry.language.name === "en");
+
+                    if(esGenera){
+                        setGeneraPkm(esGenera.genus);
+                    } else if(enGenera){
+                        setGeneraPkm(enGenera.genus);
+                    } else {
+                        setGeneraPkm('No se encontro ninguna categoria disponible.');
+                    }
+                }
+
+                if(egg_groups){setEggGroup(egg_groups[0].name)}
+                if(generation){setGenerationPkm(generation.name)}
+                if(color){setColorPkm(color.name)}
+                if(habitat){setHabitatPkm(habitat.name)}
+                
+                if(names && names.length>0){
+                    const jaName = names.find(entry => entry.language.name === "ja");
+                    if(jaName){setNameJaPkm(jaName.name)}
+                }
+
             })
 
-    }, [typesPkm, descriptionUrl]);
+    }, [typesPkm, SpecieUrl]);
 
     useEffect(() => {
         const filterTypes = () => {
@@ -122,8 +156,9 @@ export const DataPokemon = (props: {searchValue: string}) => {
 
     return (
         <div>
-            {(idPkm !== undefined) && (spritesPkm !== undefined) &&
-             <PokemonDetail name={namePkm} id={idPkm} sprites={spritesPkm} types={typesPkm} damage={relationsDamage} flavor_text_entry={descriptionPkm} />
+            {(idPkm !== undefined) && (spritesPkm !== undefined) && (heightPkm !== undefined) && (weightPkm !== undefined) &&
+             <PokemonDetail name={namePkm} id={idPkm} sprites={spritesPkm} types={typesPkm} damage={relationsDamage} flavor_text_entry={descriptionPkm} 
+             height={heightPkm} weight={weightPkm}  genera={generaPkm} eggGroup={eggGroup} habitat={habitatPkm} color={colorPkm} jaName={nameJaPkm}/>
             }
         </div>
     )
