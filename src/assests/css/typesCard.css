@@ -23,9 +23,82 @@
     display: flex;
     gap: 10px;
     margin-top: 5x;
-    color: #FFFFFF;
 }
 
+/*Root Progress Bar*/
+.progress-bar .water {
+	background-color: var(--color-water);
+}
+
+.progress-bar .grass {
+	background-color: var(--color-grass);
+}
+
+.progress-bar .poison {
+	background-color: var(--color-poison);
+}
+
+.progress-bar .fire {
+	background-color: var(--color-fire);
+}
+
+.progress-bar .bug {
+	background-color: var(--color-bug);
+}
+
+.progress-bar .dragon {
+	background: var(--color-dragon);
+}
+
+.progress-bar .flying {
+	background: var(--color-flying);
+}
+
+.progress-bar .ground {
+	background: var(--color-ground);
+}
+
+.progress-bar .steel {
+	background-color: var(--color-steel);
+}
+
+.progress-bar .psychic {
+	background-color: var(--color-psychic);
+}
+
+.progress-bar .ice {
+	background-color: var(--color-ice);
+}
+
+.progress-bar .ghost {
+	background-color: var(--color-ghost);
+}
+
+.progress-bar .normal {
+	background-color: var(--color-normal);
+}
+
+.progress-bar .rock {
+	background-color: var(--color-rock);
+}
+
+.progress-bar .electric {
+	background-color: var(--color-electric);
+}
+
+.progress-bar .fighting {
+	background-color: var(--color-fighting);
+}
+
+.progress-bar .fairy {
+	background-color: var(--color-fairy);
+}
+
+.progress-bar .dark {
+	background-color: var(--color-dark);
+}
+
+/*Root Card Element*/
 .water {
 	background-color: var(--color-water);
 }

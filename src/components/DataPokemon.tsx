@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import { IGetPokemon, ISprites, IType } from "../interfaces/pokemon.interface";
+import { IGetPokemon, ISprites, IStat, IType } from "../interfaces/pokemon.interface";
 import { IDamageRelations } from "../interfaces/typesElement.interface";
 import { IRatioDamage } from "../interfaces/ratioDamage.interface";
 import { PokemonDetail } from "./PokemonDetail";
-import { IGetSpecies } from "../interfaces/species.interface";
+import { Color, IGetSpecies } from "../interfaces/species.interface";
 
 export const DataPokemon = (props: {searchValue: string}) => {
     const { searchValue } = props;
@@ -18,12 +18,13 @@ export const DataPokemon = (props: {searchValue: string}) => {
     const [weakTypes, setWeakTypes] = useState<IDamageRelations[]>([]);
     const [heightPkm, setHeightPkm] = useState<number|undefined>();
     const [weightPkm, setWeigthPkm] = useState<number|undefined>();
+    const [baseStatsPkm, setBaseStatsPkm] = useState<IStat[]>([]);
 
     const [relationsDamage, setRelationsDamage] = useState<IRatioDamage[]>([]);
     const [SpecieUrl, setSpecieUrl] = useState<string>('');
     const [descriptionPkm, setDescriptionPkm] = useState<string>('');
     const [generaPkm, setGeneraPkm] = useState<string>('');
-    const [eggGroup, setEggGroup] = useState<string>('');
+    const [eggGroup, setEggGroup] = useState<Color[]>([]);
     const [generationPkm, setGenerationPkm] = useState<string>('');
     const [colorPkm, setColorPkm] = useState<string>('');
     const [habitatPkm, setHabitatPkm] = useState<string>('');
@@ -32,7 +33,7 @@ export const DataPokemon = (props: {searchValue: string}) => {
     const getPokemon = async () => {
         await axios.get(urlPokemonApi+searchValue)
             .then(({data}) => {
-                const {name, id, sprites, types, species, height, weight} = data as IGetPokemon;
+                const {name, id, sprites, types, species, height, weight, stats} = data as IGetPokemon;
                 console.log('getPokemon', data);
                 const namePkm = name.charAt(0).toUpperCase() + name.slice(1);
                 setNamePkm(namePkm);
@@ -42,6 +43,7 @@ export const DataPokemon = (props: {searchValue: string}) => {
                 setSpecieUrl(species.url);
                 setHeightPkm(height);
                 setWeigthPkm(weight);
+                setBaseStatsPkm(stats);
             })
             .catch((error) => {
                 console.log("getPokemon error", error);
@@ -74,32 +76,26 @@ export const DataPokemon = (props: {searchValue: string}) => {
                 console.log("getSpecie",data);
 
                 if(flavor_text_entries && flavor_text_entries.length > 0){
-                    const esTextEntry = flavor_text_entries.find(entry => entry.language.name === "es");
                     const enTextEntry = flavor_text_entries.find(entry => entry.language.name === "en");
 
-                    if(esTextEntry){
-                        setDescriptionPkm(esTextEntry.flavor_text);
-                    } else if(enTextEntry){
+                    if(enTextEntry){
                         setDescriptionPkm(enTextEntry.flavor_text);
-                        } else {
+                    } else {
                         setDescriptionPkm('No se encontro una descripción disponible.')
-                        }
+                    }
                 }
 
                 if(genera && genera.length >0){
-                    const esGenera = genera.find(entry => entry.language.name === "es");
                     const enGenera = genera.find(entry => entry.language.name === "en");
 
-                    if(esGenera){
-                        setGeneraPkm(esGenera.genus);
-                    } else if(enGenera){
+                    if(enGenera){
                         setGeneraPkm(enGenera.genus);
                     } else {
                         setGeneraPkm('No se encontro ninguna categoria disponible.');
                     }
                 }
 
-                if(egg_groups){setEggGroup(egg_groups[0].name)}
+                if(egg_groups){setEggGroup(egg_groups)}
                 if(generation){setGenerationPkm(generation.name)}
                 if(color){setColorPkm(color.name)}
                 if(habitat){setHabitatPkm(habitat.name)}
@@ -158,7 +154,8 @@ export const DataPokemon = (props: {searchValue: string}) => {
         <div>
             {(idPkm !== undefined) && (spritesPkm !== undefined) && (heightPkm !== undefined) && (weightPkm !== undefined) &&
              <PokemonDetail name={namePkm} id={idPkm} sprites={spritesPkm} types={typesPkm} damage={relationsDamage} flavor_text_entry={descriptionPkm} 
-             height={heightPkm} weight={weightPkm}  genera={generaPkm} eggGroup={eggGroup} habitat={habitatPkm} color={colorPkm} jaName={nameJaPkm}/>
+             height={heightPkm} weight={weightPkm}  genera={generaPkm} eggGroup={eggGroup} habitat={habitatPkm} color={colorPkm} jaName={nameJaPkm} 
+             stats={baseStatsPkm}/>
             }
         </div>
     )
