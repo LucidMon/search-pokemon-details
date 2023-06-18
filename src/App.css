@@ -1,7 +1,79 @@
+/*Global*/
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+/*PokemonDetail Global*/
+
 /*Section 1*/
 .title-pokemon {
   text-align: center;
 }
 .id-pokemon{
   color: #616161;
+}
+
+/*Section 2*/
+
+.pokemon-image .image-border{
+  border-radius: 50%;
+  border: 2px solid #000;
+  width: 55%;
+  height: 55%;
+
+}
+
+.pokemon-image .card{
+  border-radius: 50%;
+  padding: 5%;
+}
+
+.pokemon-image .japo{
+  text-align: center;
+}
+
+/*Section 3*/
+.pokemon-stats{
+  width: 600px;
+  padding-top: 10px;
+}
+
+.progress{
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/*Section 4*/
+.pokemon-shiny .shiny-title{
+  padding-bottom: 3px;
+}
+
+.pokemon-shiny .shiny-border{
+  border-radius: 50%;
+  border: 1px solid #EBE49F;
+  width: 55%;
+  height: 55%;
+}
+
+.pokemon-shiny .card{
+  border-radius: 50%;
+  padding: 5%;
+  background: radial-gradient(transparent 79%, #EBE49F 80%);
+  background-size: 2em 2em;
+  background-color: #ffffff;
+  opacity: 1        
+}
+
+
+/*Section 5*/
+.pokemon-characteristics{
+  padding-top: 30px;
+  margin: 8%;
+}
+
+
+
+/*Section 6*/
+/*Section 7*/
+.pokemon-damage-relations{
+  padding-top: 20px;
 }
