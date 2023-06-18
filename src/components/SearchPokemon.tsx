@@ -17,7 +17,7 @@ export const SearchPokemon: React.FC<SearchPokemonProps> = ({onSearch}) =>{
     };
 
     return(
-        <div className="container" style={{ width: "50%" }}>
+        <div className="search container" style={{ width: "50%" }}>
             <form onSubmit={handleSubmit}>
                 <div className="input-group mt-3 mb-3 mx-auto">
                     <input type="text" className="form-control" placeholder="pokemon or id" value={valueInput} onChange={(e) => handleChange(e.target.value)}></input>
